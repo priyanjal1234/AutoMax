@@ -5,8 +5,10 @@ import Features from "../components/Features";
 import HowItWorks from "../components/HowItWorks";
 import CTA from "../components/CTA";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-black to-black opacity-90 -z-10"></div>
@@ -38,10 +40,10 @@ const LandingPage = () => {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <button className="text-sm text-gray-400 hover:text-white transition-colors">
+            <button onClick={() => navigate("/login")} className="text-sm text-gray-400 hover:text-white transition-colors">
               Sign in
             </button>
-            <button className="px-6 py-2.5 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:scale-105 transform">
+            <button onClick={() => navigate("/register")} className="px-6 py-2.5 bg-white text-black rounded-lg font-medium hover:bg-gray-100 transition-all hover:scale-105 transform">
               Get Started
             </button>
           </div>
