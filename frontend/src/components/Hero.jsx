@@ -1,7 +1,9 @@
 import { ArrowRight, Play, Sparkles } from 'lucide-react'
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 
 const Hero = () => {
+  const navigate = useNavigate()
   return (
     <section className="relative pt-32 pb-20 px-6">
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -32,7 +34,7 @@ const Hero = () => {
               Start building free
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="px-8 py-4 bg-white/5 border border-white/10 rounded-lg font-medium hover:bg-white/10 transition-all backdrop-blur-sm flex items-center gap-2">
+            <button onClick={() => navigate("/demo")} className="px-8 py-4 bg-white/5 border border-white/10 rounded-lg font-medium hover:bg-white/10 transition-all backdrop-blur-sm flex items-center gap-2">
               <Play className="w-5 h-5" />
               Watch demo
             </button>
