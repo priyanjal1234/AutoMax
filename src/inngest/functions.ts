@@ -15,21 +15,21 @@ import { discordChannel } from "./channels/discord";
 import { slackChannel } from "./channels/slack";
 
 export const executeWorkflow = inngest.createFunction(
-  { 
+  {
     id: "execute-workflow",
     retries: process.env.NODE_ENV === "production" ? 3 : 0,
-    onFailure: async ({ event, step }) => {
+    onFailure: async ({ event }) => {
       return prisma.execution.update({
-        where: { inngestEventId: event.data.event.id },
+        where: { inngestEventId: event.data.event.id }, // ✅ FIXED
         data: {
           status: ExecutionStatus.FAILED,
-          error: event.data.error.message,
-          errorStack: event.data.error.stack,
+          error: event.data.error?.message,
+          errorStack: event.data.error?.stack,
         },
       });
     },
   },
-  { 
+  {
     event: "workflows/execute.workflow",
     channels: [
       httpRequestChannel(),
@@ -101,15 +101,14 @@ export const executeWorkflow = inngest.createFunction(
 
     await step.run("update-execution", async () => {
       return prisma.execution.update({
-        where: { inngestEventId, workflowId },
+        where: { inngestEventId }, // ✅ FIXED
         data: {
           status: ExecutionStatus.SUCCESS,
           completedAt: new Date(),
           output: context,
         },
-      })
+      });
     });
-
     return {
       workflowId,
       result: context,

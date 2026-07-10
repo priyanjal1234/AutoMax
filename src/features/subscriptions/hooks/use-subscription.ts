@@ -12,12 +12,11 @@ export const useSubscription = () => {
 };
 
 export const useHasActiveSubscription = () => {
-  const { data: customerState, isLoading, ...rest } = 
+  const { data: customerState, isLoading, refetch, ...rest } =
     useSubscription();
 
   const hasActiveSubscription =
-    customerState?.activeSubscriptions &&
-    customerState.activeSubscriptions.length > 0;
+    !!customerState?.activeSubscriptions?.length;
 
   return {
     hasActiveSubscription,

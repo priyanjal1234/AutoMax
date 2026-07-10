@@ -8,12 +8,16 @@ export async function POST(request: NextRequest) {
 
     if (!workflowId) {
       return NextResponse.json(
-        { success: false, error: "Missing required query parameter: workflowId" },
+        {
+          success: false,
+          error: "Missing required query parameter: workflowId",
+        },
         { status: 400 },
       );
-    };
+    }
 
     const body = await request.json();
+    const paymentIntent = body.data?.object;
 
     const stripeData = {
       // Event metadata
@@ -21,7 +25,14 @@ export async function POST(request: NextRequest) {
       eventType: body.type,
       timestamp: body.created,
       livemode: body.livemode,
-      raw: body.data?.object,
+
+      // ✅ Extract important fields (FIX)
+      amount: paymentIntent?.amount,
+      currency: paymentIntent?.currency,
+      customerId: paymentIntent?.customer,
+
+      // optional (debug ke liye)
+      raw: paymentIntent,
     };
 
     // Trigger an Inngest job
@@ -32,15 +43,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(
-      { success: true },
-      { status: 200 },
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error("Stripe webhook error:" , error);
+    console.error("Stripe webhook error:", error);
     return NextResponse.json(
       { success: false, error: "Failed to process Stripe event" },
       { status: 500 },
     );
   }
-};
+}
