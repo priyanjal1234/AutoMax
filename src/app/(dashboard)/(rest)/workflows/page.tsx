@@ -11,7 +11,7 @@ import { HydrateClient } from "@/trpc/server";
 import type { SearchParams } from "nuqs/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { SubscriptionSync } from "@/components/subscription-sync"; // ✅ added
+
 
 
 type Props = {
