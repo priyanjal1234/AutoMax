@@ -19,7 +19,7 @@ export default withSentryConfig(nextConfig, {
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
   org: "enra-doo",
-x
+
   project: "automax",
 
   // Only print logs for uploading source maps in CI
