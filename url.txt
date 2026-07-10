@@ -2,6 +2,3 @@ https://jolliness-clumsily-prevalent.ngrok-free.dev
 
 ngrok http --domain=jolliness-clumsily-prevalent.ngrok-free.dev 3000
 
-Discord webhook: https://discord.com/api/webhooks/1496804653457870858/M4EsDJygqktmjunSXa-W3ljQuBFTBRsvWsthrLyblZ7pLa8bes98_UwHoNejT3__W5Xu 
-
-Slack webhook: https://hooks.slack.com/services/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
